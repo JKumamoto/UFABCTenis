@@ -1,33 +1,34 @@
 package br.edu.ufabc.jogos_isidro.ufabctenis;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import br.edu.ufabc.jogos_isidro.ufabctenis.Menu.MenuScreen;
+import br.edu.ufabc.jogos_isidro.ufabctenis.SimpleMenu.SimpleMenu;
+import br.edu.ufabc.jogos_isidro.ufabctenis.SimpleMenu.SimpleSkin;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.Color;
 
-public class UFABCTenis extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+public class UFABCTenis extends Game {
+
+	private SimpleSkin skin;
+    private SimpleMenu current;
+
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		skin=new SimpleSkin();
+		skin.addFont("fonts/PressStart2P.ttf", 26);
+		skin.addTexture(Color.WHITE);
+		skin.addButtonStyle(Color.CLEAR, Color.CLEAR, Color.GOLD, Color.ROYAL);
+
+		current=new MenuScreen("JOGO", skin);
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		current.render(Gdx.graphics.getDeltaTime());
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
 	}
+
 }
