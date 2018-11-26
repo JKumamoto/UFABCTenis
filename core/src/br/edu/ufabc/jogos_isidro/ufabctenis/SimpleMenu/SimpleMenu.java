@@ -1,5 +1,6 @@
 package br.edu.ufabc.jogos_isidro.ufabctenis.SimpleMenu;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -14,15 +15,13 @@ import com.badlogic.gdx.utils.Scaling;
 
 public class SimpleMenu implements Screen {
 
-    private String id;
-    private boolean done;
-    private TextureRegion background;
+    protected Game game;
     protected Stage ui;
     protected Skin skin;
+    private TextureRegion background;
 
-    public SimpleMenu(String id, SimpleSkin simpleSkin, String path){
-        this.id=id;
-        setDone(false);
+    public SimpleMenu(Game game, SimpleSkin simpleSkin, String path){
+        this.game=game;
 
         skin=simpleSkin.getSkin();
         ui=new Stage();
@@ -34,9 +33,8 @@ public class SimpleMenu implements Screen {
         ui.addActor(backgroundImage);
     }
 
-    public SimpleMenu(String id, SimpleSkin simpleSkin, Color color){
-        this.id=id;
-        setDone(false);
+    public SimpleMenu(Game game, SimpleSkin simpleSkin, Color color){
+        this.game=game;
 
         skin=simpleSkin.getSkin();
         ui=new Stage();
@@ -51,31 +49,20 @@ public class SimpleMenu implements Screen {
         ui.addActor(backgroundImage);
     }
 
-    public String getId(){
-        return id;
-    }
-
-    public boolean isDone() {
-        return done;
-    }
-
-    public void setDone(boolean done) {
-        this.done = done;
-    }
-
     @Override
     public void show() {
     }
 
+    @Override
     public void render(float delta){
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         ui.act(Math.min(delta, 1/30f));
         ui.draw();
     }
 
+    @Override
     public void resize(int width, int height) {
-        ui.getViewport().update(width, height, true);
     }
 
     @Override
@@ -90,7 +77,9 @@ public class SimpleMenu implements Screen {
     public void hide() {
     }
 
+    @Override
     public void dispose(){
+        background.getTexture().dispose();
         ui.dispose();
         skin.dispose();
     }

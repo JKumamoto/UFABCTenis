@@ -28,6 +28,7 @@ public class SimpleSkin{
         BitmapFont font = generator.generateFont(parameter);
         generator.dispose(); // don't forget to dispose to avoid memory leaks!
         skin.add("default", font);
+        skin.getFont("default").getData().markupEnabled=true;
     }
 
     public void addTexture(Color color){
