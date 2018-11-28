@@ -15,35 +15,18 @@ import com.badlogic.gdx.utils.Scaling;
 
 public class SimpleMenu implements Screen {
 
-    protected Game game;
     protected Stage ui;
     protected Skin skin;
     private TextureRegion background;
 
-    public SimpleMenu(Game game, SimpleSkin simpleSkin, String path){
-        this.game=game;
-
+    public SimpleMenu(SimpleSkin simpleSkin){
         skin=simpleSkin.getSkin();
         ui=new Stage();
         Gdx.input.setInputProcessor(ui);
-
-        background=new TextureRegion(new Texture(Gdx.files.internal(path)));
-        Image backgroundImage=new Image(background);
-        backgroundImage.setScaling(Scaling.fill);
-        ui.addActor(backgroundImage);
     }
 
-    public SimpleMenu(Game game, SimpleSkin simpleSkin, Color color){
-        this.game=game;
-
-        skin=simpleSkin.getSkin();
-        ui=new Stage();
-        Gdx.input.setInputProcessor(ui);
-
-        Pixmap pixmap=new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pixmap.setColor(color);
-        pixmap.fill();
-        background=new TextureRegion(new Texture(pixmap));
+    protected void addBackground(final String path){
+        background=new TextureRegion(new Texture(Gdx.files.internal(path)));
         Image backgroundImage=new Image(background);
         backgroundImage.setScaling(Scaling.fill);
         ui.addActor(backgroundImage);

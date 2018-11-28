@@ -3,22 +3,26 @@ package br.edu.ufabc.jogos_isidro.ufabctenis.Menu;
 import br.edu.ufabc.jogos_isidro.ufabctenis.Screen.GameScreen;
 import br.edu.ufabc.jogos_isidro.ufabctenis.SimpleMenu.SimpleMenu;
 import br.edu.ufabc.jogos_isidro.ufabctenis.SimpleMenu.SimpleSkin;
+import br.edu.ufabc.jogos_isidro.ufabctenis.UFABCTenis;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class StartMenu extends SimpleMenu {
 
-    public StartMenu(final Game game, final SimpleSkin simpleSkin){
-        super(game, simpleSkin, "Images/start.jpg");
+    public StartMenu(final SimpleSkin simpleSkin){
+        super(simpleSkin);
+        addBackground("Images/start.jpg");
 
         final TextButton button = new TextButton("Start", skin);
         button.setHeight(button.getHeight()*2);
         button.setPosition(100, 300);
         button.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen("Game"));
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen("Game"));
                 dispose();
             }
         });
@@ -29,8 +33,7 @@ public class StartMenu extends SimpleMenu {
         credits.setPosition(100, 200);
         credits.addListener(new ClickListener(){
            public void clicked(InputEvent event, float x, float y){
-               dispose();
-               game.setScreen(new CreditsMenu(game, simpleSkin));
+               ((Game)Gdx.app.getApplicationListener()).setScreen(new CreditsMenu(simpleSkin));
            }
         });
         ui.addActor(credits);
@@ -41,9 +44,10 @@ public class StartMenu extends SimpleMenu {
         btn.addListener(new ClickListener(){
            public void clicked(InputEvent event, float x, float y){
                System.out.println("Saindo do jogo");
-               game.dispose();
+               Gdx.app.exit();
            }
         });
         ui.addActor(btn);
     }
+
 }

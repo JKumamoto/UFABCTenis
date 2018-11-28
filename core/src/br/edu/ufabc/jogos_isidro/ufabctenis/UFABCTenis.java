@@ -17,7 +17,7 @@ public class UFABCTenis extends Game {
 		skin.addLabelStyle(Color.WHITE, Color.CLEAR);
 		skin.addButtonStyle(Color.CLEAR, Color.CLEAR, Color.GOLD, Color.ROYAL);
 
-		this.setScreen(new StartMenu(this, skin));
+		this.setScreen(new StartMenu(skin));
 	}
 
 	@Override
