@@ -8,4 +8,5 @@ public class GameObject extends ModelInstance {
     public GameObject(Model model){
         super(model);
     }
+
 }

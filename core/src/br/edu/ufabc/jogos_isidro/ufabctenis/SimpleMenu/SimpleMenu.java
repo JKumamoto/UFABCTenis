@@ -1,35 +1,28 @@
 package br.edu.ufabc.jogos_isidro.ufabctenis.SimpleMenu;
 
-import com.badlogic.gdx.Game;
+import br.edu.ufabc.jogos_isidro.ufabctenis.Util.Parameters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class SimpleMenu implements Screen {
 
-    protected Stage ui;
+    protected Table table;
     protected Skin skin;
-    private TextureRegion background;
+    private Stage ui;
 
-    public SimpleMenu(SimpleSkin simpleSkin){
-        skin=simpleSkin.getSkin();
+    public SimpleMenu(){
+        skin=Parameters.getSimpleSkin().getSkin();
         ui=new Stage();
         Gdx.input.setInputProcessor(ui);
-    }
 
-    protected void addBackground(final String path){
-        background=new TextureRegion(new Texture(Gdx.files.internal(path)));
-        Image backgroundImage=new Image(background);
-        backgroundImage.setScaling(Scaling.fill);
-        ui.addActor(backgroundImage);
+        table=new Table(skin);
+        table.setFillParent(true);
+        table.setBackground("background");
+        ui.addActor(table);
     }
 
     @Override
@@ -46,6 +39,7 @@ public class SimpleMenu implements Screen {
 
     @Override
     public void resize(int width, int height) {
+        ui.getViewport().update(width, height, true);
     }
 
     @Override
@@ -62,7 +56,6 @@ public class SimpleMenu implements Screen {
 
     @Override
     public void dispose(){
-        background.getTexture().dispose();
         ui.dispose();
         skin.dispose();
     }

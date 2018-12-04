@@ -24,8 +24,9 @@ public class GameScreen extends AbstractScreen{
         environment=new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight,0.4f,0.4f,0.4f,1));
         environment.add(new DirectionalLight().set(0.8f,0.8f,0.8f,-1f,-0.8f,-0.2f));
+
         camera=new PerspectiveCamera(67.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(100f,100f,100f);
+        camera.position.set(0f,0f,3f);
         camera.lookAt(0f,0f,0f);
         camera.near=0.1f;
         camera.far=100f;

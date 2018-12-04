@@ -5,13 +5,18 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.Scaling;
 
 public class SimpleSkin{
 
@@ -19,6 +24,11 @@ public class SimpleSkin{
 
     public SimpleSkin(){
         skin=new Skin();
+    }
+
+    public void addBackground(String path){
+        TextureRegion background=new TextureRegion(new Texture(Gdx.files.internal(path)));
+        skin.add("background", background);
     }
 
     public void addFont(String path, int size){
@@ -29,6 +39,14 @@ public class SimpleSkin{
         generator.dispose(); // don't forget to dispose to avoid memory leaks!
         skin.add("default", font);
         skin.getFont("default").getData().markupEnabled=true;
+
+        generator = new FreeTypeFontGenerator(Gdx.files.internal(path));
+        parameter = new FreeTypeFontParameter();
+        parameter.size = size*3;
+        font = generator.generateFont(parameter);
+        generator.dispose(); // don't forget to dispose to avoid memory leaks!
+        skin.add("title", font);
+        skin.getFont("title").getData().markupEnabled=true;
     }
 
     public void addTexture(Color color){
@@ -36,6 +54,7 @@ public class SimpleSkin{
         pixmap.setColor(color);
         pixmap.fill();
         skin.add("default", new Texture(pixmap));
+        pixmap.dispose();
     }
 
     public void addLabelStyle(Color font, Color background){
@@ -57,6 +76,26 @@ public class SimpleSkin{
     public void addButtonStyle(Color up, Color down, Color checked, Color over){
         addButtonStyle(skin.newDrawable("default", up), skin.newDrawable("default", down),
                 skin.newDrawable("default", checked), skin.newDrawable("default", over));
+    }
+
+    public void addSliderStyle(Color knob, Color background){
+        SliderStyle sliderStyle=new SliderStyle(skin.newDrawable("default", background),
+                skin.newDrawable("default", knob));
+        sliderStyle.knob.setMinHeight(10);
+        sliderStyle.knob.setMinWidth(10);
+        sliderStyle.background.setMinWidth(10);
+        sliderStyle.background.setMinHeight(10);
+        skin.add("default-horizontal", sliderStyle);
+    }
+
+    public void addCheckBoxStyle(Color on, Color off, Color font){
+        CheckBoxStyle checkBoxStyle=new CheckBoxStyle(skin.newDrawable("default", off),
+                skin.newDrawable("default", on), skin.getFont("default"), font);
+        checkBoxStyle.checkboxOff.setMinHeight(10);
+        checkBoxStyle.checkboxOff.setMinWidth(10);
+        checkBoxStyle.checkboxOn.setMinHeight(10);
+        checkBoxStyle.checkboxOn.setMinWidth(10);
+        skin.add("default", checkBoxStyle);
     }
 
     public Skin getSkin() {

@@ -1,19 +1,19 @@
 package br.edu.ufabc.jogos_isidro.ufabctenis.Menu;
 
 import br.edu.ufabc.jogos_isidro.ufabctenis.SimpleMenu.SimpleMenu;
-import br.edu.ufabc.jogos_isidro.ufabctenis.SimpleMenu.SimpleSkin;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class CreditsMenu extends SimpleMenu {
 
-    public CreditsMenu(SimpleSkin simpleSkin){
-        super(simpleSkin);
+    public CreditsMenu(){
+        super();
 
-        final Label label=new Label("Desenvolvido por:\nJefferson e Hugo", skin);
-        label.setPosition(100, 300);
-        label.setWrap(true);
+        table.setBackground(skin.newDrawable("default", Color.BLACK));
 
-        ui.addActor(label);
+        table.add(new Label("UFABC Tenis\n\n\n", skin));
+        table.row();
+        table.add(new Label("Desenvolvido por:\nJefferson e Hugo", skin));
     }
 
 }

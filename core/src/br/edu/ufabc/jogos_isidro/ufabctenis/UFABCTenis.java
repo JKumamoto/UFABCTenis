@@ -1,23 +1,31 @@
 package br.edu.ufabc.jogos_isidro.ufabctenis;
 
 import br.edu.ufabc.jogos_isidro.ufabctenis.Menu.StartMenu;
+import br.edu.ufabc.jogos_isidro.ufabctenis.Model.Factory;
 import br.edu.ufabc.jogos_isidro.ufabctenis.SimpleMenu.SimpleSkin;
+import br.edu.ufabc.jogos_isidro.ufabctenis.Util.Parameters;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 
 public class UFABCTenis extends Game {
 
-	private SimpleSkin skin;
-
 	@Override
 	public void create () {
-		skin=new SimpleSkin();
-		skin.addFont("fonts/PressStart2P.ttf", 26);
+		Parameters.setGame(this);
+		Parameters.Init();
+
+		SimpleSkin skin=new SimpleSkin();
+		skin.addBackground("Images/start.jpg");
+		skin.addFont("fonts/PressStart2P.ttf", 16);
 		skin.addTexture(Color.WHITE);
 		skin.addLabelStyle(Color.WHITE, Color.CLEAR);
 		skin.addButtonStyle(Color.CLEAR, Color.CLEAR, Color.GOLD, Color.ROYAL);
+		skin.addSliderStyle(Color.ROYAL, Color.WHITE);
+		skin.addCheckBoxStyle(Color.GREEN, Color.RED, Color.WHITE);
+		Parameters.setSimpleSkin(skin);
 
-		this.setScreen(new StartMenu(skin));
+		Factory.load();
+		Parameters.setGameScreen(new StartMenu());
 	}
 
 	@Override
