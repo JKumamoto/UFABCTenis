@@ -39,8 +39,8 @@ public class StartMenu extends SimpleMenu {
                 dispose();
             }
         });
-        containers.add(new Container(button));
-        containers.get(0).height(button.getHeight()*2);
+        containers.add(new Container<TextButton>(button));
+        containers.get(0).width(button.getWidth()+5);
 
         final TextButton options = new TextButton("Opções", skin);
         options.addListener(new ClickListener(){
@@ -48,8 +48,8 @@ public class StartMenu extends SimpleMenu {
                Parameters.setGameScreen(new OptionsMenu());
            }
         });
-        containers.add(new Container(options));
-        containers.get(1).height(options.getHeight()*2);
+        containers.add(new Container<TextButton>(options));
+        containers.get(1).width(options.getWidth()+5);
 
         final TextButton credits = new TextButton("Creditos", skin);
         credits.addListener(new ClickListener(){
@@ -57,24 +57,24 @@ public class StartMenu extends SimpleMenu {
                Parameters.setGameScreen(new CreditsMenu());
            }
         });
-        containers.add(new Container(credits));
-        containers.get(2).height(credits.getHeight()*2);
+        containers.add(new Container<TextButton>(credits));
+        containers.get(2).width(credits.getWidth()+5);
 
         final TextButton btn = new TextButton("Exit", skin);
-        //btn.setHeight(btn.getHeight()*2);
         btn.addListener(new ClickListener(){
            public void clicked(InputEvent event, float x, float y){
                System.out.println("Saindo do jogo");
                Gdx.app.exit();
            }
         });
-        containers.add(new Container(btn));
-        containers.get(3).height(btn.getHeight()*2);
+        containers.add(new Container<TextButton>(btn));
+        containers.get(3).width(btn.getWidth()+5);
 
         final Label label=new Label("Linha1\n2", skin, "title", Color.CLEAR);
         verticalGroup.addActor(label);
         verticalGroup.space(100);
         for(Container c : containers){
+            c.height(button.getHeight()*2);
             verticalGroup.space(10);
             verticalGroup.addActor(c);
         }

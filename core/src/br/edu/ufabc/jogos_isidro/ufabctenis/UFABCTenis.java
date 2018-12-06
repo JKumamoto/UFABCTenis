@@ -15,13 +15,13 @@ public class UFABCTenis extends Game {
 		Parameters.Init();
 
 		SimpleSkin skin=new SimpleSkin();
-		skin.addBackground("Images/start.jpg");
-		skin.addFont("fonts/PressStart2P.ttf", 16);
+		skin.addBackground("Images/background.jpg");
+		skin.addFont("SimpleSkin/PressStart2P.ttf", 16);
 		skin.addTexture(Color.WHITE);
 		skin.addLabelStyle(Color.WHITE, Color.CLEAR);
 		skin.addButtonStyle(Color.CLEAR, Color.CLEAR, Color.GOLD, Color.ROYAL);
 		skin.addSliderStyle(Color.ROYAL, Color.WHITE);
-		skin.addCheckBoxStyle(Color.GREEN, Color.RED, Color.WHITE);
+		skin.addCheckBoxStyle("SimpleSkin/checked.png", "SimpleSkin/unchecked.png", Color.WHITE);
 		Parameters.setSimpleSkin(skin);
 
 		Factory.load();

@@ -10,13 +10,12 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class SimpleSkin{
 
@@ -88,13 +87,13 @@ public class SimpleSkin{
         skin.add("default-horizontal", sliderStyle);
     }
 
-    public void addCheckBoxStyle(Color on, Color off, Color font){
-        CheckBoxStyle checkBoxStyle=new CheckBoxStyle(skin.newDrawable("default", off),
-                skin.newDrawable("default", on), skin.getFont("default"), font);
-        checkBoxStyle.checkboxOff.setMinHeight(10);
-        checkBoxStyle.checkboxOff.setMinWidth(10);
-        checkBoxStyle.checkboxOn.setMinHeight(10);
-        checkBoxStyle.checkboxOn.setMinWidth(10);
+    public void addCheckBoxStyle(String on, String off, Color font){
+        CheckBoxStyle checkBoxStyle=new CheckBoxStyle(new TextureRegionDrawable(new TextureRegion(new Texture(off))),
+                new TextureRegionDrawable(new TextureRegion(new Texture(on))), skin.getFont("default"), font);
+        checkBoxStyle.checkboxOff.setMinHeight(skin.getFont("default").getLineHeight());
+        checkBoxStyle.checkboxOff.setMinWidth(skin.getFont("default").getSpaceWidth());
+        checkBoxStyle.checkboxOn.setMinHeight(skin.getFont("default").getLineHeight());
+        checkBoxStyle.checkboxOn.setMinWidth(skin.getFont("default").getSpaceWidth());
         skin.add("default", checkBoxStyle);
     }
 

@@ -1,6 +1,5 @@
 package br.edu.ufabc.jogos_isidro.ufabctenis.Menu;
 
-import br.edu.ufabc.jogos_isidro.ufabctenis.Model.Factory;
 import br.edu.ufabc.jogos_isidro.ufabctenis.SimpleMenu.SimpleMenu;
 import br.edu.ufabc.jogos_isidro.ufabctenis.Util.Parameters;
 import com.badlogic.gdx.graphics.Color;
@@ -13,9 +12,9 @@ import com.badlogic.gdx.utils.Align;
 
 import java.util.ArrayList;
 
-public class OptionsMenu extends SimpleMenu {
+class OptionsMenu extends SimpleMenu {
 
-    public OptionsMenu(){
+    OptionsMenu(){
         super();
 
         table.align(Align.topLeft);
@@ -31,11 +30,11 @@ public class OptionsMenu extends SimpleMenu {
         table.row();
 
         Table table1=new Table();
-        Container container=new Container(table1);
+        Container container=new Container<Table>(table1);
         table.add(container);
         ArrayList<Container> containers=new ArrayList<Container>();
 
-        containers.add(new Container(new Label("Volume Musica", skin)));
+        containers.add(new Container<Label>(new Label("Volume Musica", skin)));
 
         final Slider volumeMusic=new Slider(0f, 1f, 0.1f, false, skin);
         volumeMusic.setValue(Parameters.getMusicVolume());
@@ -46,9 +45,9 @@ public class OptionsMenu extends SimpleMenu {
                 return false;
             }
         });
-        containers.add(new Container(volumeMusic));
+        containers.add(new Container<Slider>(volumeMusic));
 
-        containers.add(new Container(new Label("Volume", skin)));
+        containers.add(new Container<Label>(new Label("Volume", skin)));
 
         final CheckBox musicCheckBox=new CheckBox(null, skin);
         musicCheckBox.setChecked(Parameters.isMusicEnabled());
@@ -59,9 +58,9 @@ public class OptionsMenu extends SimpleMenu {
                 return false;
             }
         });
-        containers.add(new Container(musicCheckBox));
+        containers.add(new Container<CheckBox>(musicCheckBox));
 
-        containers.add(new Container(new Label("Volume Som", skin)));
+        containers.add(new Container<Label>(new Label("Volume Som", skin)));
 
         final Slider volumeSound=new Slider(0f, 1f, 0.1f, false, skin);
         volumeSound.setValue(Parameters.getSoundVolume());
@@ -72,9 +71,9 @@ public class OptionsMenu extends SimpleMenu {
                 return false;
             }
         });
-        containers.add(new Container(volumeSound));
+        containers.add(new Container<Slider>(volumeSound));
 
-        containers.add(new Container(new Label("Volume", skin)));
+        containers.add(new Container<Label>(new Label("Volume", skin)));
 
         final CheckBox soundCheckBox=new CheckBox(null, skin);
         soundCheckBox.setChecked(Parameters.isSoundEnabled());
@@ -85,24 +84,24 @@ public class OptionsMenu extends SimpleMenu {
                 return false;
             }
         });
-        containers.add(new Container(soundCheckBox));
+        containers.add(new Container<CheckBox>(soundCheckBox));
 
-        containers.add(new Container(new Label("Linha1\n2", skin, "title", Color.CLEAR)));
-        containers.add(new Container(new Label("Linha1\n2", skin, "title", Color.CLEAR)));
+        containers.add(new Container<Label>(new Label("Linha1\n2", skin, "title", Color.CLEAR)));
+        containers.add(new Container<Label>(new Label("Linha1\n2", skin, "title", Color.CLEAR)));
 
-        Factory.getSound("applause").play(Parameters.getSoundVolume());
         final TextButton back=new TextButton("Voltar", skin);
         back.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 Parameters.setGameScreen(new StartMenu());
             }
         });
-        containers.add(new Container(back));
-        containers.add(new Container(new Label("", skin)));
+        containers.add(new Container<TextButton>(back));
+        containers.get(containers.size()-1).width(back.getWidth()+5);
+        containers.add(new Container<Label>(new Label("", skin)));
 
         for(int i=0; i<containers.size(); i+=2){
             for(int j=0; j<2; j++) {
-                containers.get(i + j).height(back.getHeight() * 2);
+                containers.get(i + j).height(containers.get(i+j).getActor().getHeight() * 2);
                 table1.add(containers.get(i + j));
             }
             table1.row();

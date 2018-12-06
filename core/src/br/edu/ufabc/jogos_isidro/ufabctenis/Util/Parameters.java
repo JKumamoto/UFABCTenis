@@ -20,7 +20,7 @@ public class Parameters {
         setMusicVolume(1.0f);
     }
 
-    public static Game getGame() {
+    private static Game getGame() {
         return game;
     }
 

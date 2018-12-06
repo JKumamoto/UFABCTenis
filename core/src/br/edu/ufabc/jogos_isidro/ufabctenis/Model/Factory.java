@@ -1,5 +1,6 @@
 package br.edu.ufabc.jogos_isidro.ufabctenis.Model;
 
+import br.edu.ufabc.jogos_isidro.ufabctenis.Util.Parameters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.audio.Sound;
@@ -30,8 +31,9 @@ public class Factory {
         return modelos.get(name);
     }
 
-    public static Sound getSound(String name) {
-        return sounds.get(name);
+    public static void getSound(String name) {
+        if(Parameters.isSoundEnabled())
+            sounds.get(name).play(Parameters.getSoundVolume());
     }
 
 }
